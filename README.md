@@ -6,13 +6,16 @@ Design a web application that allows employees to submit feedback toward each ot
 ## First run
 
 **Prerequisites**: [Docker](https://www.docker.com) and [Docker-compose](https://docs.docker.com/compose/) are installed.
+
 **First step:**
 On the project folder root, run the following command to boot it up:
 
     docker-compose up
 
 It's up and running at http://localhost:3000
+
 That's all done, no step 2.
+
 Login information:
 User with admin role account:
 
