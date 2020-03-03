@@ -1,0 +1,28 @@
+extends ../../_global/layout.logged-in.pug
+
+block content
+  section.hero.is-light
+    .hero-body
+      .container
+        h1.title
+          | Manage Employees
+        h2.subtitle
+          | Manage employees and assign performance reviews
+
+  .section
+    .container
+      .field.has-addons
+        p.control.is-expanded
+          input.input(type="text" placeholder="Find an employee")
+        p.control
+          span.select
+            select
+              option Employee code
+              option Name
+              option Email
+        p.control
+          a.button.is-primary Find
+
+      #table-employees
+
+  include ../../_global/components/requiring-review-modal.pug

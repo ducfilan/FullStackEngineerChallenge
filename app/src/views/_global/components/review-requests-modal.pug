@@ -1,0 +1,22 @@
+.modal.review-requests-modal--wrapper
+  .modal-background
+  .modal-card
+    header.modal-card-head
+      p.modal-card-title Review to 
+        b=targetInfo.name
+      button.delete
+    section.modal-card-body
+      form
+        input(type='hidden' name='reviewRequestId' value=_id)
+        section.hero.is-primary
+          .hero-body
+            .container
+              h1.title=reviewBoardInfo.title
+              h2.subtitle=reviewBoardInfo.description
+        each reviewFactor in reviewFactors
+          .field
+            label.label=reviewFactor.title
+            .control
+              #{reviewFactor.inputControl}(class=reviewFactor.inputControl name=`factor_${reviewFactor._id}`)
+    footer.modal-card-foot
+      button.button.is-success.review-requests-modal--submit-button(data-id=_id) Confirm Review

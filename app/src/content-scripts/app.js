@@ -1,0 +1,5 @@
+import login from './pages/login'
+import home from './pages/home'
+import adminEmployees from './pages/admin/employees'
+import adminReviewBoard from './pages/admin/review-boards'
+import commonActions from './pages/common-actions'

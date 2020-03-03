@@ -1,0 +1,27 @@
+extends ../_global/layout.public.pug
+
+block content
+  section.login.hero.is-fullheight
+    .hero-body
+      .container
+        .columns.is-centered
+          .column.is-5-tablet.is-4-desktop.is-3-widescreen
+            form.box.login-form--wrapper
+              .field.has-text-centered
+                img(src="images/logo-text.png")
+                p.is-size-4.is-uppercase.has-text-weight-light Review System
+              .field
+                label.label Email
+                .control.has-icons-left
+                  input.input.login-form--email(type="email" placeholder="name@paypay.ne.jp" required)
+                  span.icon.is-small.is-left
+                    include ../../_public/images/icons/svgs/envelope-solid.svg
+              .field
+                label.label Password
+                .control.has-icons-left
+                  input.input.login-form--password(type="password" placeholder="••••••••" required)
+                  span.icon.is-small.is-left
+                    include ../../_public/images/icons/svgs/lock-solid.svg
+              .field.has-text-centered
+                button.login-form--login-button.button.is-primary.is-uppercase(type="submit")
+                  | Login

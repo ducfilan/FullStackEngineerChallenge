@@ -1,0 +1,24 @@
+.modal.requiring-review-modal--wrapper
+  .modal-background
+  .modal-card
+    header.modal-card-head
+      p.modal-card-title Assign review from 
+        b
+      button.delete
+    section.modal-card-body
+      form
+        input(type='hidden' name='fromEmail' value='')
+        input(type='hidden' name='requesterEmail' value=user.email)
+        section.hero.is-primary
+        .field
+          label.label Review board
+          .control
+            .select
+              select.requiring-review-modal--review-boards(name='reviewBoard')
+                option Select a board
+        .field
+          label.label Target employees emails:
+          .control
+            textarea.textarea(name='targetEmails' placeholder='Separated emails by ;')
+    footer.modal-card-foot
+      button.button.is-success.requiring-review-modal--submit-button Assign

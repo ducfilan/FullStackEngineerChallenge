@@ -1,0 +1,25 @@
+nav.navbar.is-white(role="navigation" aria-label="main navigation")
+  .navbar-brand
+    .navbar-item.logo
+      img(src="../../images/logo.png")
+    h4.navbar-item.title.is-4.is-marginless.has-text-centered.is-overlay.brand-name.is-uppercase.has-text-weight-light Review system
+
+    a.navbar-burger(role="button" data-target="navMenu" aria-label="menu" aria-expanded="false")
+      span(aria-hidden="true")
+      span(aria-hidden="true")
+      span(aria-hidden="true")
+  if user.role === roles.admin
+    .navbar-start.is-capitalized
+      a.navbar-item(href="/") Home
+      .navbar-item.has-dropdown.is-hoverable
+        a.navbar-link(href="/admin") Admin pages
+        .navbar-dropdown.is-boxed
+          a.navbar-item(href="/admin/employees") Manage Employees
+          a.navbar-item(href="/admin/reviews") Manage Performance reviews
+  #navMenu.navbar-menu
+    .navbar-end
+      .navbar-item.has-dropdown.is-hoverable
+        a.navbar-link(href="/me") #{user.name}
+        .navbar-dropdown.is-boxed
+          a#button-view-profile.navbar-item.is-capitalized(href='#') Profile
+          a#button-logout.navbar-item.is-capitalized(href='#') Logout

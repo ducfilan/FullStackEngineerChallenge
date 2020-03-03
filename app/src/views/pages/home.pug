@@ -1,0 +1,24 @@
+extends ../_global/layout.logged-in.pug
+
+block content
+  section.hero.is-info.feedback-message
+    .hero-body
+      .container
+        h1.title
+          | Welcome, #{user.name}!
+        h2.subtitle
+          | This is the required performance review of our company. Please submit the requiring feedbacks before due date!
+
+  #tabs--review-requests.tabs.is-centered
+    ul.is-uppercase
+      li.is-active(data-targetSelector='#tabs-review-requests')
+        a Review Requests
+      li(data-targetSelector='#tabs-submited-history')
+        a Submited history
+
+  .section.tabs-content.is-paddingless
+    .container
+      #tabs-review-requests.tabs--review-requests--content
+      #tabs-submited-history.tabs--review-requests--content.is-hidden
+
+  #review-requests-modal

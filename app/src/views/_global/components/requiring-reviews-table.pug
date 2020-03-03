@@ -1,0 +1,37 @@
+table.table.is-fullwidth.is-striped.is-hoverable
+  thead
+    tr
+      th Title
+      th Image
+      th Target User
+      th Requester
+      th Due Date
+      th.has-text-centered Action
+  tbody
+    each employee in users
+      tr
+        td.is-narrow=employee.employeeCode
+        td.is-narrow
+          .image.is-48x48
+            img.is-rounded(src=employee.imageUrl)
+        td
+          a(href="#") #{employee.name}
+        td=employee.email
+        td.is-narrow.table-employees--actions
+          button.button.is-primary.is-rounded.is-uppercase
+            span.icon
+              include ../../../_public/images/icons/svgs/pen-solid.svg
+            span Require review
+          button.button.is-danger.is-rounded.is-uppercase.table-employees--button-delete(data-id=employee._id)
+            span Delete
+
+-
+  var pageCount = Math.ceil(usersCount/defaultLimit)
+
+nav.pagination.is-rounded(role="navigation")
+  a.pagination-previous Previous
+  a.pagination-next Next page
+  ul.pagination-list
+    - for (var i = 1; i <= pageCount; i++)
+      li
+        a(class=`pagination-link ${i === currentPage ? 'is-current' : ''}`)=i

@@ -1,0 +1,78 @@
+version: "3"
+
+services:
+  ppr_api_node:
+    build:
+      context: ./api
+      dockerfile: api.Dockerfile
+    image: ppr_api_node
+    container_name: ppr_api_node
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - JWT_SECRET_KEY=$JWT_SECRET_KEY
+      - MONGO_USERNAME=$MONGO_USERNAME
+      - MONGO_PASSWORD=$MONGO_PASSWORD
+      - MONGO_HOSTNAME=ppr_db
+      - MONGO_PORT=$MONGO_PORT
+      - MONGO_INITDB_DATABASE=$MONGO_INITDB_DATABASE
+      - NODE_PORT=$API_NODE_PORT
+    ports:
+      - "80:8080"
+      - "9229:9229"
+    volumes:
+      - ./api:/home/node/api
+      - api_node_modules:/home/node/api/node_modules
+    networks:
+      - app-network
+    depends_on:
+      - "ppr_db"
+    command: /wait-for.sh ppr_db:$MONGO_PORT -- npm run debug
+  ppr_app_node:
+    build:
+      context: ./app
+      dockerfile: app.Dockerfile
+    image: ppr_app_node
+    container_name: ppr_app_node
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - NODE_PORT=$APP_NODE_PORT
+      - JWT_SECRET_KEY=$JWT_SECRET_KEY
+    ports:
+      - "3000:3000"
+      - "9230:9229"
+    volumes:
+      - ./app:/home/node/app
+      - app_node_modules:/home/node/app/node_modules
+    networks:
+      - app-network
+    command: npm start
+  ppr_db:
+    build:
+      context: ./api
+      dockerfile: db.Dockerfile
+    image: ppr_db
+    container_name: ppr_db
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$MONGO_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD=$MONGO_PASSWORD
+      - MONGO_INITDB_DATABASE=$MONGO_INITDB_DATABASE
+      - API_BASE_URL=$API_BASE_URL
+    ports:
+      - "27018:27017"
+    volumes:
+      - dbdata:/data/db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  dbdata:
+  app_node_modules:
+  api_node_modules:

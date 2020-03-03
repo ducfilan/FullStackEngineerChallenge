@@ -1,0 +1,26 @@
+table.table.is-fullwidth.is-striped.is-hoverable
+  thead
+    tr
+      th Title
+      th Description
+      th Due date
+      th Review factors
+  tbody
+    each reviewBoard in reviewBoards
+      tr
+        td=reviewBoard.title
+        td
+          p=reviewBoard.description
+        td=new Date(reviewBoard.dueDate).toLocaleDateString()
+        td=reviewBoard.reviewFactors
+
+-
+  var pageCount = Math.ceil(reviewBoardsCount/defaultLimit)
+
+nav.pagination.is-rounded(role="navigation")
+  a.pagination-previous Previous
+  a.pagination-next Next page
+  ul.pagination-list
+    - for (var i = 1; i <= pageCount; i++)
+      li
+        a(class=`pagination-link ${i === currentPage ? 'is-current' : ''}`)=i

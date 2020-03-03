@@ -1,0 +1,40 @@
+table.table.is-fullwidth.is-striped.is-hoverable
+  thead
+    tr
+      th Title
+      th Image
+      th Target employee
+      th Email
+      th Due date
+      th Requester
+      th.has-text-centered Action
+  tbody
+    each request in reviewRequests
+      tr
+        td.is-hidden.table-review-requests--review-request-id=request._id
+        td.is-hidden.table-review-requests--review-board=request.reviewBoard
+        td=request.reviewBoardInfo.title
+        td.is-narrow
+          .image.is-48x48
+            img.is-rounded(src=request.targetInfo.imageUrl)
+        td.is-narrow
+          a.table-review-requests--target-name(href="#")=request.targetInfo.name
+        td.is-narrow.table-review-requests--target-email=request.targetEmail
+        td.is-narrow.table-review-requests--due-date=new Date(request.reviewBoardInfo.dueDate).toLocaleDateString()
+        td.is-narrow.table-review-requests--requester=request.requesterEmail
+        td.is-narrow.table-review-requests--actions
+          button.button.is-primary.is-rounded.is-uppercase.table-review-requests--start-review-button
+            span.icon
+              include ../../../_public/images/icons/svgs/pen-solid.svg
+            span Start reviewing
+
+-
+  var pageCount = Math.ceil(usersCount/defaultLimit)
+
+nav.pagination.is-rounded(role="navigation")
+  a.pagination-previous Previous
+  a.pagination-next Next page
+  ul.pagination-list
+    - for (var i = 1; i <= pageCount; i++)
+      li
+        a(class=`pagination-link ${i === currentPage ? 'is-current' : ''}`)=i
