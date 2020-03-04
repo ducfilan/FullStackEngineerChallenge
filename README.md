@@ -8,13 +8,29 @@ Design a web application that allows employees to submit feedback toward each ot
 **Prerequisites**: [Docker](https://www.docker.com) and [Docker-compose](https://docs.docker.com/compose/) are installed.
 
 **First step:**
+
+Create a `.env` file in root folder (same folder with `docker-compose.yml` file) with content:
+
+    # Secret key will be used to sign JWT, http://uuidgenerator.net
+    JWT_SECRET_KEY=b3359f99-4442-803a-0a7b-2f4972f37c7d
+    MONGO_USERNAME=paypay
+    MONGO_PASSWORD=S3cr3t
+    MONGO_PORT=27017
+    MONGO_INITDB_DATABASE=paypayreview
+    API_NODE_PORT=8080
+    APP_NODE_PORT=3000
+    NODE_ENV=dev
+    API_BASE_URL=http://ppr_api_node:8080/api/v1/%    
+
+**Second step:**
+
 On the project folder root, run the following command to boot it up:
 
     docker-compose up
 
 It's up and running at http://localhost:3000
 
-That's all done, no step 2.
+That's all done.
 
 Login information:
 User with admin role account:
